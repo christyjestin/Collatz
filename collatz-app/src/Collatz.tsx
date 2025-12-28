@@ -165,7 +165,7 @@ function Collatz(props: { input?: string }) {
 				/>
 			</div>
 
-			{rule !== 0 && <h2>Rule: {rule === 1 ? '3n + 1' : 'n / 2'}</h2>}
+			{rule !== 0 && <h2 className="rule_header">Rule: {rule === 1 ? '3n + 1' : 'n / 2'}</h2>}
 
 			<div className="bits_wrapper">
 				<div className="number_display">{number}</div>
@@ -234,9 +234,9 @@ function Collatz(props: { input?: string }) {
 				</>
 			)}
 			<br />
-			<a href="/info#visualizer-info">Why This Visualization?</a>
+			<a href="/collatz/#/info#visualizer-info">Why This Visualization?</a>
 			<br />
-			<a href="/info">More Info</a>
+			<a href="/collatz/#/info">More Info</a>
 		</div>
 	);
 }

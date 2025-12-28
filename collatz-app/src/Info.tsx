@@ -35,8 +35,8 @@ export default function Info() {
 					\end{cases}"
 				/>
 				The conjcture has not yet been proven. You can see some examples of the rule in action on here:{' '}
-				<a href="/5">5</a>, <a href="/32">32</a>, and <a href="/349">349</a>. Here's the Wikipedia{' '}
-				<a href="https://en.wikipedia.org/wiki/Collatz_conjecture">page</a>.
+				<a href="/collatz/#/5">5</a>, <a href="/collatz/#/32">32</a>, and <a href="/collatz/#/349">349</a>.
+				Here's the Wikipedia <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">page</a>.
 			</section>
 
 			<section>
@@ -57,14 +57,15 @@ export default function Info() {
 				</p>
 				<ul>
 					<li>
-						<b>Powers of 2</b>: these just cleanly halve until you reach 1 (e.g. <a href="/4">4</a>,{' '}
-						<a href="/64">64</a>, <a href="/65536">65536</a>).
+						<b>Powers of 2</b>: these just cleanly halve until you reach 1 (e.g.{' '}
+						<a href="/collatz/#/4">4</a>, <a href="/collatz/#/64">64</a>,{' '}
+						<a href="/collatz/#/65536">65536</a>).
 					</li>
 					<li>
 						<b>Even Numbers</b>: these halve until you reach their largest odd divisor. Therefore it'd be
 						sufficient to prove that the conjecture holds for odd numbers to prove that it holds for all
-						positive integers (e.g. <a href="/44">44</a> → 11, <a href="/80">80</a> → 5,{' '}
-						<a href="/196608">196608</a> → 3).
+						positive integers (e.g. <a href="/collatz/#/44">44</a> → 11, <a href="/collatz/#/80">80</a> → 5,{' '}
+						<a href="/collatz/#/196608">196608</a> → 3).
 					</li>
 					<li>
 						<b>Geometric Series with a Common Ratio of 4</b>: these are the only odd numbers that
@@ -73,8 +74,8 @@ export default function Info() {
 						<a href="https://flexbooks.ck12.org/cbook/ck-12-precalculus-concepts-2.0/section/12.5/primary/lesson/geometric-series-pcalc/">
 							formula
 						</a>{' '}
-						for finite sums of geometric series (e.g. 1 + 4 + 16 = <a href="/21">21</a>, 1 + 4 + 16 + 64 ={' '}
-						<a href="/85">85</a>, 1 + ⋅⋅⋅ + 1024 = <a href="/1365">1365</a>).
+						for finite sums of geometric series (e.g. 1 + 4 + 16 = <a href="/collatz/#/21">21</a>, 1 + 4 +
+						16 + 64 = <a href="/collatz/#/85">85</a>, 1 + ⋅⋅⋅ + 1024 = <a href="/collatz/#/1365">1365</a>).
 						<BlockMath math="a_n = \sum_{i=0}^{n}{4^i} = 1 + 4 + 16 + \cdots + 4^{n} = \frac{4^{n + 1} - 1}{3}" />
 					</li>
 				</ul>
@@ -84,10 +85,10 @@ export default function Info() {
 
 			<section>
 				<h2 id="visualizer-info">The Visualizer</h2>
-				The binary representation in the <a href="/">visualizer</a> gives us a better idea of what's going on
-				here. In the even case, we tear off a few zeroes from the end of the number. In the odd case, we can say
-				that <InlineMath math="3n + 1 = (2n + 1) + n." /> In binary, doubling the number and adding 1 means
-				shifting it left by one position and then tacking on a 1 to the end. Then we just add the original
+				The binary representation in the <a href="/collatz/#/">visualizer</a> gives us a better idea of what's
+				going on here. In the even case, we tear off a few zeroes from the end of the number. In the odd case,
+				we can say that <InlineMath math="3n + 1 = (2n + 1) + n." /> In binary, doubling the number and adding 1
+				means shifting it left by one position and then tacking on a 1 to the end. Then we just add the original
 				number.
 				<br />
 				<br />
