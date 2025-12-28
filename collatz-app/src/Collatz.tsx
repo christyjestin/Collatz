@@ -4,8 +4,14 @@ import './Collatz.css';
 
 const effectLag = 1000;
 
-function Collatz() {
-	const [inputNumber, setInputNumber] = useState('');
+const is_positive_int = (value: string) => {
+	const regex = /^[1-9][0-9]*$/; // positive integers only
+	return regex.test(value);
+};
+
+function Collatz(props: { input?: string }) {
+	const inputString: string = props.input && is_positive_int(props.input) ? props.input : '';
+	const [inputNumber, setInputNumber] = useState(inputString);
 	const [number, setNumber] = useState(1);
 	const [bits, setBits] = useState<string[]>(['1']);
 	const [bitsTwo, setBitsTwo] = useState<string[]>([]);
@@ -14,12 +20,13 @@ function Collatz() {
 	const [boundingCount, setBoundingCount] = useState(0);
 	const [speed, setSpeed] = useState(1);
 	const [skipHalvings, setSkipHalvings] = useState(false);
+	const [rule, setRule] = useState(0);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 
 		// Allow only positive integers or the empty string
-		if (value === '' || /^\d+$/.test(value)) {
+		if (value === '' || is_positive_int(value)) {
 			setInputNumber(value);
 		}
 	};
@@ -65,16 +72,19 @@ function Collatz() {
 	const nextCollatz = () => {
 		if (number === 1) {
 			setInFlux(false);
+			setRule(0);
 			return;
 		}
 		if (number % 2 === 1) {
+			setRule(1);
 			setBits([...bits, '1']);
 			setBitsTwo(bits);
 			setBoundingCount(bits.length);
 			// The nextAdd and finishAdd callbacks will handle the rest of the logic for this case.
 		} else {
+			setRule(2);
 			let n = number / 2;
-            // Skip through the halvings if the toggle is enabled.
+			// Skip through the halvings if the toggle is enabled.
 			while (skipHalvingsRef.current && n % 2 === 0) {
 				n = n / 2;
 			}
@@ -95,7 +105,7 @@ function Collatz() {
 		const newCarry = Math.floor(sum / 2);
 		setBitsThree((prevBits) => [newBit.toString(), ...prevBits]);
 
-        // Set the next callback to either continue adding or wrap things up.
+		// Set the next callback to either continue adding or wrap things up.
 		if (index < bits.length || newCarry === 1) {
 			setTimeout(() => nextAdd(index + 1, newCarry), effectLag / speedRef.current);
 		} else {
@@ -115,6 +125,7 @@ function Collatz() {
 
 	return (
 		<div className="calc_box">
+			<h1>The Collatz Conjecture</h1>
 			<div className="calc_container">
 				<input
 					type="text"
@@ -147,12 +158,14 @@ function Collatz() {
 					type="range"
 					className="speed_toggle_input"
 					min="0.5"
-					max="2"
+					max="3"
 					step="0.25"
 					value={speed}
 					onChange={(e) => setSpeed(parseFloat(e.target.value))}
 				/>
 			</div>
+
+			{rule !== 0 && <h2>Rule: {rule === 1 ? '3n + 1' : 'n / 2'}</h2>}
 
 			<div className="bits_wrapper">
 				<div className="number_display">{number}</div>
@@ -201,8 +214,8 @@ function Collatz() {
 
 			{bitsThree.length > 0 && (
 				<>
-                    {/* Horizontal dividing line for addition */}
-					<hr /> 
+					{/* Horizontal dividing line for addition */}
+					<hr />
 					<div className="bits_wrapper">
 						<div className="bits_container">
 							<div className="bits_row">
@@ -220,6 +233,10 @@ function Collatz() {
 					</div>
 				</>
 			)}
+			<br />
+			<a href="/info#visualizer-info">Why This Visualization?</a>
+			<br />
+			<a href="/info">More Info</a>
 		</div>
 	);
 }
