@@ -6,7 +6,8 @@ import { useEffect } from 'react';
 export default function Info() {
 	// Scroll to section if the URL has an anchor tag
 	useEffect(() => {
-		const hash = window.location.hash.slice(1); // Remove the # prefix
+		// Grab the anchor from the end; this is necessary because we're using a HashRouter
+		const hash = window.location.hash.split('#').slice(-1)[0];
 		if (hash) {
 			const element = document.getElementById(hash);
 			if (element) {
@@ -85,16 +86,25 @@ export default function Info() {
 
 			<section>
 				<h2 id="visualizer-info">The Visualizer</h2>
-				The binary representation in the <a href="/collatz/#/">visualizer</a> gives us a better idea of what's
-				going on here. In the even case, we tear off a few zeroes from the end of the number. In the odd case,
-				we can say that <InlineMath math="3n + 1 = (2n + 1) + n." /> In binary, doubling the number and adding 1
-				means shifting it left by one position and then tacking on a 1 to the end. Then we just add the original
-				number.
-				<br />
-				<br />
-				Lastly, here's some data analysis I did on the dynamics of Collatz sequences:{' '}
-				<a href="https://x.com/christyjestin/status/2004682306649469255?s=20">Tweet #1</a>,{' '}
-				<a href="https://x.com/christyjestin/status/2004759229278912663?s=20">Tweet #2</a>.
+				<p>
+					The binary representation in the <a href="/collatz/#/">visualizer</a> gives us a better idea of
+					what's going on here. In the even case, we tear off a few zeroes from the end of the number. In the
+					odd case, we can say that <InlineMath math="3n + 1 = (2n + 1) + n." /> In binary, doubling the
+					number and adding 1 means shifting it left by one position and then tacking on a 1 to the end. Then
+					we just add the original number.
+				</p>
+				<p>
+					The geometric series case also has a neat binary representation. Terms in the series look like 1,
+					101, 10101, ..., and when you multiply by 3, the 1s and 0s line up so you end up with all 1s. Adding
+					another 1 gets you a number like 100... i.e. a power of 2. This looks slightly different in the
+					visualizer, but you can see the same idea (e.g. <a href="/collatz/#/21">21</a>,{' '}
+					<a href="/collatz/#/85">85</a>).
+				</p>
+				<p>
+					Lastly, here's some data exploration I did on the dynamics of Collatz sequences:{' '}
+					<a href="https://x.com/christyjestin/status/2004682306649469255?s=20">Tweet #1</a>,{' '}
+					<a href="https://x.com/christyjestin/status/2004759229278912663?s=20">Tweet #2</a>.
+				</p>
 			</section>
 		</div>
 	);
